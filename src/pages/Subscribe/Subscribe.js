@@ -30,6 +30,7 @@ function Subscribe() {
                 id="name"
                 placeholder="Name"
                 aria-describedby="nameHelp"
+                required
               />
             </div>
             <div className="mb-3">
@@ -41,6 +42,7 @@ function Subscribe() {
                 className="form-control form-control-lg"
                 id="email"
                 placeholder="Email"
+                required
               />
             </div>
             <div className="d-flex justify-content-end">
