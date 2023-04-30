@@ -1,0 +1,58 @@
+.submit-quiz {
+  background-image: url("../../assets/microphone.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+.review-question {
+  background-color: #ffffff;
+  padding: 2rem;
+  width: 80%;
+  margin-bottom: 3rem;
+}
+
+.review-question h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0bb7ce;
+  margin-bottom: 2rem;
+}
+
+.review-question h2 {
+  font-weight: 300;
+  font-size: 1rem;
+}
+
+.review-question p {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.instruction1 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: #ffffff;
+  margin-bottom: 2rem;
+}
+
+.instruction2 {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2rem;
+  color: #ffffff;
+  margin-bottom: 2rem;
+}
+
+input {
+  background: transparent !important;
+}
+
+@media only screen and (max-width: 750px) {
+  .review-question {
+    width: 100%;
+  }
+}
