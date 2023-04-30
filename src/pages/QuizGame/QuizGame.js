@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./quizGame.css";
 import LogoWhite from "../../components/LogoWhite";
@@ -11,6 +11,8 @@ function QuizGame() {
     useState(questions);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isLastQuestion, setIsLastQuestion] = useState(false);
+  const [hasAnsweredCurrentQuestion, setHasAnsweredCurrentQuestion] =
+    useState(false);
 
   const getCurrentQuestion = () => {
     return questions.at(currentQuestionIndex);
@@ -41,7 +43,19 @@ function QuizGame() {
       return question;
     });
     setQuestionsWithResponses(qwr);
+    setHasAnsweredCurrentQuestion(true);
   };
+
+  const getNextButtonClass = () => {
+    if (!hasAnsweredCurrentQuestion) {
+      return "btn next-btn next-btn-disabled";
+    }
+    return "btn next-btn";
+  };
+
+  useEffect(() => {
+    setHasAnsweredCurrentQuestion(false);
+  }, [currentQuestionIndex]);
 
   return (
     <div className="p-4 quiz-game">
@@ -57,11 +71,19 @@ function QuizGame() {
           />
           <div className="d-flex justify-content-end mt-5">
             {!isLastQuestion ? (
-              <button className="btn next-btn" onClick={gotoNextQuestion}>
+              <button
+                className={getNextButtonClass()}
+                disabled={!hasAnsweredCurrentQuestion}
+                onClick={gotoNextQuestion}
+              >
                 Next Question {">>"}
               </button>
             ) : (
-              <button className="btn next-btn" onClick={handleLastQuestion}>
+              <button
+                className={getNextButtonClass()}
+                disabled={!hasAnsweredCurrentQuestion}
+                onClick={handleLastQuestion}
+              >
                 Review
               </button>
             )}
