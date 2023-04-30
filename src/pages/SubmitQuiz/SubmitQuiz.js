@@ -1,12 +1,27 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import "./submitQuiz.css";
 import LogoWhite from "../../components/LogoWhite";
-import questions from "../QuizGame/questions";
+import { useEffect, useState } from "react";
 
 function Subscribe() {
+  const navigate = useNavigate();
+  const { state } = useLocation();
+  const [questionsWithResponses, setQuestionsWithResponses] = useState(null);
+
   const handleSubscribe = (e) => {
     e.preventDefault();
     window.location.href = "/game-option";
   };
+
+  useEffect(() => {
+    if (!state || !state.questionsWithResponses) {
+      navigate("/game-option");
+    } else {
+      setQuestionsWithResponses(state.questionsWithResponses);
+    }
+
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div className="p-4 submit-quiz">
@@ -18,14 +33,17 @@ function Subscribe() {
         <div className="col-12 col-md-6 d-flex justify-content-center">
           <div className="review-question">
             <h1>Review Answers</h1>
-            {questions.map(({ position, question }) => (
-              <div key={position} className="mb-4">
-                <h2>
-                  Q{position}. {question}
-                </h2>
-                <p>A.</p>
-              </div>
-            ))}
+            {questionsWithResponses &&
+              questionsWithResponses.map(
+                ({ position, question, selectedOption }) => (
+                  <div key={position} className="mb-4">
+                    <h2>
+                      Q{position}. {question}
+                    </h2>
+                    <p>{selectedOption}</p>
+                  </div>
+                )
+              )}
           </div>
         </div>
         <div className="col-12 col-md-6">

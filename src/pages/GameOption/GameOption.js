@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./gameOption.css";
 import Logo from "../../components/Logo";
 import womanWithHeadset from "../../assets/womanWithHeadset.png";
@@ -26,9 +27,9 @@ function GameOption() {
             Answer questions about a popular artist and stand a chance for a
             free ticket
           </p>
-          <a href="/quiz-game" className="btn btn-custom float-right">
+          <Link to="/quiz-game" className="btn btn-custom float-right">
             Start Quiz
-          </a>
+          </Link>
         </div>
       </div>
     </div>

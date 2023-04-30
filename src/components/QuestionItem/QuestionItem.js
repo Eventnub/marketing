@@ -1,7 +1,14 @@
+import { useEffect, useState } from "react";
 import "./questionItem.css";
 
-function QuestionItem({ question: currentQuestion }) {
+function QuestionItem({ question: currentQuestion, onSelectOption }) {
   const { position, question, options } = currentQuestion;
+  const [selectedOptionIndex, setSelectedOptionIndex] = useState(null);
+
+  const handleSelectOption = (index) => {
+    setSelectedOptionIndex(index);
+    onSelectOption(position, index);
+  };
 
   const getIndexLetter = (index) => {
     switch (index) {
@@ -18,6 +25,17 @@ function QuestionItem({ question: currentQuestion }) {
     }
   };
 
+  const getOptionButtonClass = (index) => {
+    if (selectedOptionIndex === index) {
+      return "btn btn-option btn-option-selected";
+    }
+    return "btn btn-option";
+  };
+
+  useEffect(() => {
+    setSelectedOptionIndex(null);
+  }, [currentQuestion]);
+
   return (
     <div className="quiz">
       <div className="d-flex flex-row align-items-baseline quiz-question">
@@ -30,9 +48,12 @@ function QuestionItem({ question: currentQuestion }) {
             key={option}
             className="col-12 col-md-6 d-flex justify-content-center align-items-center"
           >
-            <button className="btn btn-option">{`${getIndexLetter(
-              index
-            )}. ${option}`}</button>
+            <button
+              className={getOptionButtonClass(index)}
+              onClick={() => handleSelectOption(index)}
+            >
+              {`${getIndexLetter(index)}. ${option}`}
+            </button>
           </div>
         ))}
       </div>

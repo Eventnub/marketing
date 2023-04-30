@@ -1,10 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./quizGame.css";
 import LogoWhite from "../../components/LogoWhite";
 import questions from "./questions";
 import QuestionItem from "../../components/QuestionItem/QuestionItem";
 
 function QuizGame() {
+  const navigate = useNavigate();
+  const [questionsWithResponses, setQuestionsWithResponses] =
+    useState(questions);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isLastQuestion, setIsLastQuestion] = useState(false);
 
@@ -14,16 +18,30 @@ function QuizGame() {
 
   const gotoNextQuestion = () => {
     const nextQuestionIndex = currentQuestionIndex + 1;
-    if (nextQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(nextQuestionIndex);
-    }
+    setCurrentQuestionIndex(nextQuestionIndex);
 
     if (nextQuestionIndex === questions.length - 1) {
       setIsLastQuestion(true);
     }
   };
 
-  const handleLastQuestion = () => {};
+  const handleLastQuestion = () => {
+    navigate("/submit-quiz", {
+      state: {
+        questionsWithResponses,
+      },
+    });
+  };
+
+  const handleSelectOption = (questionPosition, optionIndex) => {
+    const qwr = questionsWithResponses.map((question) => {
+      if (question.position === questionPosition) {
+        question.selectedOption = question.options[optionIndex];
+      }
+      return question;
+    });
+    setQuestionsWithResponses(qwr);
+  };
 
   return (
     <div className="p-4 quiz-game">
@@ -33,7 +51,10 @@ function QuizGame() {
       </div>
       <div className="d-flex justify-content-center align-items-center">
         <div className="quiz-container">
-          <QuestionItem question={getCurrentQuestion()} />
+          <QuestionItem
+            question={getCurrentQuestion()}
+            onSelectOption={handleSelectOption}
+          />
           <div className="d-flex justify-content-end mt-5">
             {!isLastQuestion ? (
               <button className="btn next-btn" onClick={gotoNextQuestion}>

@@ -8,7 +8,7 @@
   color: #ffffff;
 }
 
-.position{
+.position {
   font-size: 2rem;
   margin-right: 1rem;
 }
@@ -26,5 +26,10 @@
 
 .btn-option:hover {
   color: #1358a5;
-  border: 2px solid #fffd83;
+  border: 2px solid #ffd5c3;
+}
+
+.btn-option-selected {
+  background-color: #ffd5c3 !important;
+  border: 2px solid #1358a5;
 }
