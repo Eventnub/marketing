@@ -20,6 +20,7 @@ function GameOption() {
           src={womanWithHeadset}
           className="card-img-top"
           alt="Woman with headset"
+          loading="lazy"
         />
         <p className="how-well">How well do you know your favorite artist?</p>
         <div className="card-body">
@@ -27,7 +28,7 @@ function GameOption() {
             Answer questions about a popular artist and stand a chance for a
             free ticket
           </p>
-          <Link to="/quiz-game" className="btn btn-custom float-right">
+          <Link to="/quiz-game" className="btn btn-custom mt-2 float-right">
             Start Quiz
           </Link>
         </div>

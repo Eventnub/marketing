@@ -1,6 +1,5 @@
 .quiz-game {
-  background-color: #0f427c;
-  background-image: url("../../assets/microphone.png");
+  background-image: url("../../assets/microphone.svg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -29,5 +28,5 @@
 
 .next-btn-disabled {
   background-color: #f3f1f1 !important;
-  color: #5c5c5c !important;
+  color: #2c2c2c !important;
 }
