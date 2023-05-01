@@ -1,9 +1,26 @@
+import { useState } from "react";
 import "./subscribe.css";
 import Logo from "../../components/Logo";
+import MailChimpForm from "../../components/MailChimpForm";
 
 function Subscribe() {
-  const handleSubscribe = (e) => {
+  const [firstName, setFirstName] = useState("");
+  const [email, setEmail] = useState("");
+  const [shouldSubmit, setShouldSubmit] = useState("");
+
+  const handleFirstNameChange = (e) => {
+    setFirstName(e.target.value);
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleSubscribe = async (e) => {
     e.preventDefault();
+    if (firstName && email) {
+      setShouldSubmit(true);
+    }
   };
 
   return (
@@ -21,15 +38,17 @@ function Subscribe() {
           </h1>
           <form onSubmit={handleSubscribe}>
             <div className="mb-3">
-              <label htmlFor="name" className="form-label d-none">
-                Email address
+              <label htmlFor="firstName" className="form-label d-none">
+                First Name
               </label>
               <input
                 type="text"
                 className="form-control form-control-lg"
-                id="name"
-                placeholder="Name"
+                id="firstName"
+                placeholder="First Name"
                 aria-describedby="nameHelp"
+                value={firstName}
+                onChange={handleFirstNameChange}
                 required
               />
             </div>
@@ -42,6 +61,8 @@ function Subscribe() {
                 className="form-control form-control-lg"
                 id="email"
                 placeholder="Email"
+                value={email}
+                onChange={handleEmailChange}
                 required
               />
             </div>
@@ -51,6 +72,12 @@ function Subscribe() {
               </button>
             </div>
           </form>
+          <MailChimpForm
+            style={{ display: "none" }}
+            firstName={firstName}
+            email={email}
+            shouldSubmit={shouldSubmit}
+          />
         </div>
       </div>
     </div>

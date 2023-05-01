@@ -1,16 +1,30 @@
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./submitQuiz.css";
 import LogoWhite from "../../components/LogoWhite";
-import { useEffect, useState } from "react";
+import MailChimpForm from "../../components/MailChimpForm";
 
 function Subscribe() {
   const navigate = useNavigate();
   const { state } = useLocation();
+  const [firstName, setFirstName] = useState("");
+  const [email, setEmail] = useState("");
+  const [shouldSubmit, setShouldSubmit] = useState("");
   const [questionsWithResponses, setQuestionsWithResponses] = useState(null);
 
-  const handleSubscribe = (e) => {
+  const handleFirstNameChange = (e) => {
+    setFirstName(e.target.value);
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleSubscribe = async (e) => {
     e.preventDefault();
-    window.location.href = "/game-option";
+    if (firstName && email) {
+      setShouldSubmit(true);
+    }
   };
 
   useEffect(() => {
@@ -61,6 +75,8 @@ function Subscribe() {
                   id="firstName"
                   placeholder="First Name"
                   aria-describedby="nameHelp"
+                  value={firstName}
+                  onChange={handleFirstNameChange}
                   required
                 />
               </div>
@@ -86,6 +102,8 @@ function Subscribe() {
                   className="form-control form-control-lg"
                   id="email"
                   placeholder="Email"
+                  value={email}
+                  onChange={handleEmailChange}
                   required
                 />
               </div>
@@ -95,6 +113,12 @@ function Subscribe() {
                 </button>
               </div>
             </form>
+            <MailChimpForm
+              style={{ display: "none" }}
+              firstName={firstName}
+              email={email}
+              shouldSubmit={shouldSubmit}
+            />
           </div>
         </div>
       </div>
