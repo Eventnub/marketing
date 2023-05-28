@@ -1,9 +1,13 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ReactGA4 from "react-ga4";
 import Subscribe from "./pages/Subscribe/Subscribe";
 import GameOption from "./pages/GameOption/GameOption";
 import QuizGame from "./pages/QuizGame/QuizGame";
 import SubmitQuiz from "./pages/SubmitQuiz/SubmitQuiz";
 import NotFound from "./pages/NotFound";
+
+ReactGA4.initialize("G-JB5KJ1ZCGH");
+ReactGA4.pageview(window.location.pathname);
 
 function App() {
   return (
