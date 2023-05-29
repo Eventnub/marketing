@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./subscribe.css";
 import Logo from "../../components/Logo";
 import MailChimpForm from "../../components/MailChimpForm";
+import { GoogleAnalytics } from "../../utils/analytics";
 
 function Subscribe() {
   const [firstName, setFirstName] = useState("");
@@ -19,9 +20,14 @@ function Subscribe() {
   const handleSubscribe = async (e) => {
     e.preventDefault();
     if (firstName && email) {
+      GoogleAnalytics.trackEvent("subscribe", { firstName, email });
       setShouldSubmit(true);
     }
   };
+
+  useEffect(() => {
+    GoogleAnalytics.trackPageView(window.location.pathname);
+  }, []);
 
   return (
     <div className="row">
