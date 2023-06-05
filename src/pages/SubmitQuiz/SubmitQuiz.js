@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 import "./submitQuiz.css";
 import LogoWhite from "../../components/LogoWhite";
 import MailChimpForm from "../../components/MailChimpForm";
+import { submitQuizAnswers } from "../../utils/requests";
 
 function Subscribe() {
   const navigate = useNavigate();
   const { state } = useLocation();
+  const [requesting, setRequesting] = useState(false);
   const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [shouldSubmit, setShouldSubmit] = useState("");
   const [questionsWithResponses, setQuestionsWithResponses] = useState(null);
@@ -16,14 +20,35 @@ function Subscribe() {
     setFirstName(e.target.value);
   };
 
+  const handleLastNameChange = (e) => {
+    setLastName(e.target.value);
+  };
+
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
 
   const handleSubscribe = async (e) => {
     e.preventDefault();
-    if (firstName && email) {
-      setShouldSubmit(true);
+    if (firstName && lastName && email && state.questionsWithResponses) {
+      const answers = state.questionsWithResponses.map((q) => ({
+        questionId: q.position,
+        answer: q.selectedOption,
+      }));
+
+      setRequesting(true);
+      try {
+        await submitQuizAnswers(firstName, lastName, email, "None", answers);
+        setShouldSubmit(true);
+      } catch (error) {
+        swal({
+          title: "Oops!",
+          text: "Something went wrong. Please try again!",
+          icon: "error",
+          button: "OK",
+        });
+      }
+      setRequesting(false);
     }
   };
 
@@ -90,6 +115,8 @@ function Subscribe() {
                   id="lastName"
                   placeholder="Last Name"
                   aria-describedby="nameHelp"
+                  value={lastName}
+                  onChange={handleLastNameChange}
                   required
                 />
               </div>
@@ -108,8 +135,12 @@ function Subscribe() {
                 />
               </div>
               <div className="d-flex justify-content-end">
-                <button type="submit" className="btn btn-custom">
-                  Submit quiz
+                <button
+                  type="submit"
+                  className="btn btn-custom"
+                  disabled={requesting}
+                >
+                  {requesting ? "Please wait" : "Submit quiz"}
                 </button>
               </div>
             </form>
