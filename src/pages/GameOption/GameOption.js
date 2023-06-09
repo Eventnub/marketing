@@ -1,9 +1,15 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./gameOption.css";
 import Logo from "../../components/Logo";
 import womanWithHeadset from "../../assets/womanWithHeadset.png";
+import { GoogleAnalytics } from "../../utils/analytics";
 
 function GameOption() {
+  useEffect(() => {
+    GoogleAnalytics.trackPageView(window.location.pathname);
+  }, []);
+
   return (
     <div className="container py-4 game-option">
       <div className="d-flex align-items-baseline main">

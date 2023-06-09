@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import "./submitQuiz.css";
-import LogoWhite from "../../components/LogoWhite";
+import Logo from "../../components/Logo";
 import MailChimpForm from "../../components/MailChimpForm";
 import { submitQuizAnswers } from "../../utils/requests";
+import { GoogleAnalytics } from "../../utils/analytics";
 
 function Subscribe() {
   const navigate = useNavigate();
@@ -39,6 +40,10 @@ function Subscribe() {
       setRequesting(true);
       try {
         await submitQuizAnswers(firstName, lastName, email, "None", answers);
+        GoogleAnalytics.trackEvent("submit quiz and subscribe", {
+          firstName,
+          email,
+        });
         setShouldSubmit(true);
       } catch (error) {
         swal({
@@ -57,6 +62,7 @@ function Subscribe() {
       navigate("/game-option");
     } else {
       setQuestionsWithResponses(state.questionsWithResponses);
+      GoogleAnalytics.trackPageView(window.location.pathname);
     }
 
     // eslint-disable-next-line
@@ -65,8 +71,8 @@ function Subscribe() {
   return (
     <div className="p-4 submit-quiz">
       <div className="d-flex align-items-baseline main">
-        <LogoWhite width="40px" height="40px" />
-        <h1 className="ms-3 text-light company-name">eventnub</h1>
+        <Logo width="40px" height="40px" />
+        <h1 className="ms-3 company-name">eventnub</h1>
       </div>
       <div className="row">
         <div className="col-12 col-md-6 d-flex justify-content-center">
@@ -79,7 +85,10 @@ function Subscribe() {
                     <h2>
                       Q{position}. {question}
                     </h2>
-                    <p>{selectedOption}</p>
+                    <p className="fst-italic">
+                      {"> "}
+                      {selectedOption}
+                    </p>
                   </div>
                 )
               )}

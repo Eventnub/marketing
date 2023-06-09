@@ -30,7 +30,7 @@ function Subscribe() {
   }, []);
 
   return (
-    <div className="row">
+    <div className="subscribe row">
       <div className="col-md-6 d-none d-md-block left-side"></div>
       <div className="col-12 col-md-6">
         <div className="container p-4">
