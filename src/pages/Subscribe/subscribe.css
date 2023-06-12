@@ -57,6 +57,19 @@ input {
   font-size: 16px;
 }
 
+.subscribe input {
+  font-size: 1rem;
+  color: rgb(92, 92, 92);
+}
+
+.subscribe input:-webkit-autofill,
+.subscribe input:-webkit-autofill:hover,
+.subscribe input:-webkit-autofill:focus {
+  -webkit-text-fill-color: rgb(92, 92, 92);
+  -webkit-box-shadow: 0 0 0px 1000px #00000000 inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 .btn-custom {
   background-color: #1358a5 !important;
   border-radius: 360px !important;

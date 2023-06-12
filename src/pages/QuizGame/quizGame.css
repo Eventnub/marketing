@@ -1,9 +1,4 @@
 .quiz-game {
-  background-image: url("../../assets/microphone.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
   min-height: 100vh;
 }
 

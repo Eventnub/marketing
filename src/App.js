@@ -7,7 +7,6 @@ import SubmitQuiz from "./pages/SubmitQuiz/SubmitQuiz";
 import NotFound from "./pages/NotFound";
 
 ReactGA4.initialize("G-JB5KJ1ZCGH");
-// ReactGA4.pageview(window.location.pathname);
 
 function App() {
   return (

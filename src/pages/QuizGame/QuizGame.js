@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./quizGame.css";
-import LogoWhite from "../../components/LogoWhite";
+import Logo from "../../components/Logo";
 import questions from "./questions";
 import QuestionItem from "../../components/QuestionItem/QuestionItem";
+import { GoogleAnalytics } from "../../utils/analytics";
 
 function QuizGame() {
   const navigate = useNavigate();
@@ -57,11 +58,15 @@ function QuizGame() {
     setHasAnsweredCurrentQuestion(false);
   }, [currentQuestionIndex]);
 
+  useEffect(() => {
+    GoogleAnalytics.trackPageView(window.location.pathname);
+  }, []);
+
   return (
     <div className="p-4 quiz-game">
       <div className="d-flex align-items-baseline main">
-        <LogoWhite width="40px" height="40px" />
-        <h1 className="ms-3 text-light company-name">eventnub</h1>
+        <Logo width="40px" height="40px" />
+        <h1 className="ms-3 company-name">eventnub</h1>
       </div>
       <div className="d-flex justify-content-center align-items-center">
         <div className="quiz-container">
