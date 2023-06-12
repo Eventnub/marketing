@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_BASE_URL = "https://eventnub.onrender.com/api";
+const API_BASE_URL = "https://globeventnub.herokuapp.com/api";
 
 export const submitQuizAnswers = async (
   firstName,
