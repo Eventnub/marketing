@@ -40,7 +40,7 @@ function Subscribe() {
           </div>
           <p className="intro">Don’t wait</p>
           <h1 className="info">
-            Get notified on the next big concert in your city.
+            Get a Free Ticket to your Next Afrobeat Concert
           </h1>
           <form onSubmit={handleSubscribe}>
             <div className="mb-3">
@@ -73,7 +73,7 @@ function Subscribe() {
               />
             </div>
             <div className="d-flex justify-content-end">
-              <button type="submit" className="btn btn-custom">
+              <button type="submit" className="btn btn-custom w-100">
                 Subscribe
               </button>
             </div>
