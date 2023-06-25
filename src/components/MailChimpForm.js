@@ -13,6 +13,7 @@ function MailChimpForm({ style, firstName, email, shouldSubmit }) {
     <form
       action="https://app.us21.list-manage.com/subscribe/post?u=8f7a988a6b3be9fa367e5a777&amp;id=5f9038e1a4&amp;f_id=0039b4e1f0"
       method="post"
+      target="_blank"
       id="mc-embedded-subscribe-form"
       name="mc-embedded-subscribe-form"
       className="validate"

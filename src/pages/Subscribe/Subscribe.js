@@ -22,6 +22,9 @@ function Subscribe() {
     if (firstName && email) {
       GoogleAnalytics.trackEvent("subscribe", { firstName, email });
       setShouldSubmit(true);
+      setTimeout(() => {
+        window.location.replace("https://globeventnub.com");
+      }, 1000);
     }
   };
 
