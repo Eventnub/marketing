@@ -45,6 +45,9 @@ function Subscribe() {
           email,
         });
         setShouldSubmit(true);
+        setTimeout(() => {
+          window.location.replace("https://globeventnub.com");
+        }, 1000);
       } catch (error) {
         swal({
           title: "Oops!",
